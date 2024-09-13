@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-purple-700">
+        <div id="board" class="grid grid-cols-3 gap-4 mb-4">
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="0"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="1"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="2"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="3"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="4"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="5"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="6"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="7"></button>
+            <button class="cell w-16 h-16 text-4xl text-purple-500 bg-white border border-purple-500 rounded-lg hover:bg-purple-100" data-index="8"></button>
+        </div>
+        <div id="status" class="text-white text-xl mb-4">Player X's turn</div>
+        <button id="restart" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-zinc-800">Restart</button>
+    </div>
+
+    <script>
+        let board = Array(9).fill(null);
+        let currentPlayer = 'X';
+        const statusElement = document.getElementById('status');
+        const boardElement = document.getElementById('board');
+
+        function handleClick(event) {
+            const index = event.target.dataset.index;
+            if (board[index] || checkGameStatus()) return;
+
+            board[index] = currentPlayer;
+            event.target.textContent = currentPlayer;
+            
+            const gameStatus = checkGameStatus();
+            if (gameStatus === 'win') {
+                statusElement.textContent = `Player ${currentPlayer} wins!`;
+            } else if (gameStatus === 'tie') {
+                statusElement.textContent = `It's a tie!`;
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusElement.textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+
+        function checkGameStatus() {
+    // Define all winning combinations
+    const winConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+
+    // Check each winning condition using if-else
+    if (
+        (board[0] && board[0] === board[1] && board[0] === board[2]) ||
+        (board[3] && board[3] === board[4] && board[3] === board[5]) ||
+        (board[6] && board[6] === board[7] && board[6] === board[8]) ||
+        (board[0] && board[0] === board[3] && board[0] === board[6]) ||
+        (board[1] && board[1] === board[4] && board[1] === board[7]) ||
+        (board[2] && board[2] === board[5] && board[2] === board[8]) ||
+        (board[0] && board[0] === board[4] && board[0] === board[8]) ||
+        (board[2] && board[2] === board[4] && board[2] === board[6])
+    ) {
+        return 'win';
+    } else if (board.every(cell => cell !== null)) {
+        return 'tie';
+    } else {
+        return null;
+    }
+}
+
+
+        function restartGame() {
+            board.fill(null);
+            currentPlayer = 'X';
+            statusElement.textContent = `Player X's turn`;
+            boardElement.querySelectorAll('.cell').forEach(cell => {
+                cell.textContent = '';
+            });
+        }
+
+        boardElement.querySelectorAll('.cell').forEach(cell => {
+            cell.addEventListener('click', handleClick);
+        });
+
+        document.getElementById('restart').addEventListener('click', restartGame);
+    </script>
+</body>
+</html>

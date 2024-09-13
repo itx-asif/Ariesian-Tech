@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Audio Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class=" md:p-6 h-screen py-6 px-2 bg-purple-900">
+    <div class="max-w-sm mx-auto flex bg-green-200 md:rounded-lg mx-auto   p-6 h-full ">
+        <div id="Player" class="m-auto">
+        <h1 class="text-2xl font-semibold  mb-6 text-center">Audio Player</h1>
+        <div class="text-center mb-6">
+            <div class="mb-4  ">
+                <img src="images.jpeg" alt="Album Art" class="w-48 h-48   mx-auto shadow-lg rounded-lg ">
+            </div>
+            <div class="mb-6 text-center">
+                <span id="songName" class="text-lg">No audio playing</span>
+            </div>
+            
+            <div class="md:w-3/4  w-full mx-auto mb-6">
+                <input type="range" class="w-full " id="progress-bar" min="0" value="0">
+                <div class="flex items-center justify-between mt-[-8px]" >
+
+                    <span class="progress-value" id="progress-value">00:00</span>  <span class="duration-value" id="duration-value">00:00</span>
+                </div>
+            </div>
+            <div class="mb-6 flex justify-center md:gap-8 gap-4 ">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" id="prev-button"><i class="fa-solid fa-backward text-white"></i></button>
+                <button class=" rounded-full bg-blue-500 p-2 w-10 h-10" id="play-button"><i class="fa-solid fa-play text-white"></i></button>
+                <button class="rounded-full bg-blue-500 p-2 w-10 h-10 hidden" id="pause-button"><i class="fa-solid fa-pause text-white"></i></button>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" id="next-button"><i class="fa-solid fa-forward text-white"></i></button>
+                
+                <button id="playlist-toggle" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600  "><i class="fa-solid fa-list"></i></button>
+            </div>
+        </div>
+    </div>
+        <div id="playlist-panel" class="hidden w-full h-[96%]">
+            <div class="flex justify-between mb-4">
+
+                <h2 class="text-xl">Playlist</h2>
+                <button id="close-panel" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600  top-4 right-4">Close</button>
+            </div>
+            <ul id="playlist" class="list-none p-0 m-0">
+                <!-- Playlist items will be injected here -->
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
