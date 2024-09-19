@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs with Filter</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <section id="portfolio" class="py-10">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-center mb-8">Portfolio Gallery</h1>
+            <div class="flex justify-center mb-4">
+                <button class="bg-blue-500 text-white px-4 py-2 mx-2 filter-button" data-filter="all">All</button>
+                <button class="bg-green-500 text-white px-4 py-2 mx-2 filter-button" data-filter="nature">Nature</button>
+                <button class="bg-red-500 text-white px-4 py-2 mx-2 filter-button" data-filter="people">People</button>
+                <button class="bg-yellow-500 text-white px-4 py-2 mx-2 filter-button" data-filter="cars">Cars</button>
+                <button class="bg-purple-500 text-white px-4 py-2 mx-2 filter-button" data-filter="buildings">Buildings</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="gallery_product filter nature">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter people">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter nature">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter cars">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter buildings">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter cars">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter buildings">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter cars">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter cars">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter nature">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter buildings">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+                <div class="gallery_product filter people">
+                    <img src="https://via.placeholder.com/365" class="w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(document).ready(function(){
+            $(".filter-button").click(function(){
+                var value = $(this).attr('data-filter');
+                
+                if(value == "all") {
+                    $('.gallery_product').show('1000');
+                } else {
+                    $(".gallery_product").not('.'+value).hide('3000');
+                    $('.gallery_product').filter('.'+value).show('3000');
+                }
+
+                $(".filter-button").removeClass("bg-blue-700").addClass("bg-blue-500");
+                $(this).removeClass("bg-blue-500").addClass("bg-blue-700");
+            });
+        });
+    </script>
+</body>
+</html>
